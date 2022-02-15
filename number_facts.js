@@ -55,5 +55,5 @@ async function get4NumFacts() {
 }
 
 // getNumFact();
-showMultiNumFacts();
-show4NumFacts();
+// showMultiNumFacts();
+// show4NumFacts();
