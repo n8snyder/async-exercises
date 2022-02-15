@@ -19,8 +19,30 @@ async function drawTwoFromNewDeck() {
 async function getNewDeck() {
   const url = `https://deckofcardsapi.com/api/deck/new/draw/?count=0`;
   const resp = await axios.get(url);
-  const deckId = resp.data.deck_id; 
+  const deckId = resp.data.deck_id;
   return deckId;
 }
 
-drawTwoFromNewDeck();
+
+
+var deckId;
+
+async function setDeckId() {
+  deckId = await getNewDeck();
+  console.log("Created new deck with id:", deckId);
+}
+setDeckId();
+
+async function handleDrawCard(evt) {
+  console.log("handleDrawCard");
+  const card = await getCard(deckId);
+  if (card === undefined) { return; }
+  displayCard(card);
+}
+
+function displayCard(card) {
+  console.log("displayCard");
+  $("#cardList").append($(`<li><img src="${card.image}"></li>`));
+}
+
+$("#getCardButton").on("click", handleDrawCard);
